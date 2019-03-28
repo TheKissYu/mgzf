@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.HouseConfigMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.HouseConfig">
+		<id column="hc_id" jdbcType="INTEGER" property="hcId" />
+		<result column="hc_h_id" jdbcType="INTEGER" property="hcHId" />
+		<result column="hc_air" jdbcType="INTEGER" property="hcAir" />
+		<result column="hc_bed" jdbcType="INTEGER" property="hcBed" />
+		<result column="hc_table" jdbcType="INTEGER" property="hcTable" />
+		<result column="hc_chest" jdbcType="INTEGER" property="hcChest" />
+		<result column="hc_toilet" jdbcType="INTEGER"
+			property="hcToilet" />
+		<result column="hc_wifi" jdbcType="INTEGER" property="hcWifi" />
+		<result column="hc_calorifier" jdbcType="INTEGER"
+			property="hcCalorifier" />
+		<result column="hc_kv" jdbcType="INTEGER" property="hcKv" />
+		<result column="hc_balcony" jdbcType="INTEGER"
+			property="hcBalcony" />
+		<result column="hc_washer" jdbcType="INTEGER"
+			property="hcWasher" />
+		<result column="hc_refrigerator" jdbcType="INTEGER"
+			property="hcRefrigerator" />
+		<result column="hc_tv" jdbcType="INTEGER" property="hcTv" />
+		<result column="hc_pansonic" jdbcType="INTEGER"
+			property="hcPansonic" />
+		<result column="hc_gasstove" jdbcType="INTEGER"
+			property="hcGasstove" />
+		<result column="hc_Cooker" jdbcType="INTEGER"
+			property="hcCooker" />
+		<result column="hc_sofa" jdbcType="INTEGER" property="hcSofa" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		hc_id, hc_h_id, hc_air, hc_bed, hc_table, hc_chest, hc_toilet, hc_wifi,
+		hc_calorifier,
+		hc_kv, hc_balcony, hc_washer, hc_refrigerator, hc_tv, hc_pansonic,
+		hc_gasstove, hc_Cooker,
+		hc_sofa
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from house_config
+		where hc_id = #{hcId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from house_config
+		where hc_id = #{hcId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.cly.mgzf.enity.HouseConfig">
+		insert into house_config (hc_id, hc_h_id, hc_air,
+		hc_bed, hc_table, hc_chest,
+		hc_toilet, hc_wifi, hc_calorifier,
+		hc_kv, hc_balcony, hc_washer,
+		hc_refrigerator, hc_tv, hc_pansonic,
+		hc_gasstove, hc_Cooker, hc_sofa
+		)
+		values (#{hcId,jdbcType=INTEGER}, #{hcHId,jdbcType=INTEGER},
+		#{hcAir,jdbcType=INTEGER},
+		#{hcBed,jdbcType=INTEGER}, #{hcTable,jdbcType=INTEGER}, #{hcChest,jdbcType=INTEGER},
+		#{hcToilet,jdbcType=INTEGER}, #{hcWifi,jdbcType=INTEGER},
+		#{hcCalorifier,jdbcType=INTEGER},
+		#{hcKv,jdbcType=INTEGER}, #{hcBalcony,jdbcType=INTEGER}, #{hcWasher,jdbcType=INTEGER},
+		#{hcRefrigerator,jdbcType=INTEGER}, #{hcTv,jdbcType=INTEGER},
+		#{hcPansonic,jdbcType=INTEGER},
+		#{hcGasstove,jdbcType=INTEGER}, #{hcCooker,jdbcType=INTEGER}, #{hcSofa,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.HouseConfig">
+		insert into house_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="hcId != null">
+				hc_id,
+			</if>
+			<if test="hcHId != null">
+				hc_h_id,
+			</if>
+			<if test="hcAir != null">
+				hc_air,
+			</if>
+			<if test="hcBed != null">
+				hc_bed,
+			</if>
+			<if test="hcTable != null">
+				hc_table,
+			</if>
+			<if test="hcChest != null">
+				hc_chest,
+			</if>
+			<if test="hcToilet != null">
+				hc_toilet,
+			</if>
+			<if test="hcWifi != null">
+				hc_wifi,
+			</if>
+			<if test="hcCalorifier != null">
+				hc_calorifier,
+			</if>
+			<if test="hcKv != null">
+				hc_kv,
+			</if>
+			<if test="hcBalcony != null">
+				hc_balcony,
+			</if>
+			<if test="hcWasher != null">
+				hc_washer,
+			</if>
+			<if test="hcRefrigerator != null">
+				hc_refrigerator,
+			</if>
+			<if test="hcTv != null">
+				hc_tv,
+			</if>
+			<if test="hcPansonic != null">
+				hc_pansonic,
+			</if>
+			<if test="hcGasstove != null">
+				hc_gasstove,
+			</if>
+			<if test="hcCooker != null">
+				hc_Cooker,
+			</if>
+			<if test="hcSofa != null">
+				hc_sofa,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="hcId != null">
+				#{hcId,jdbcType=INTEGER},
+			</if>
+			<if test="hcHId != null">
+				#{hcHId,jdbcType=INTEGER},
+			</if>
+			<if test="hcAir != null">
+				#{hcAir,jdbcType=INTEGER},
+			</if>
+			<if test="hcBed != null">
+				#{hcBed,jdbcType=INTEGER},
+			</if>
+			<if test="hcTable != null">
+				#{hcTable,jdbcType=INTEGER},
+			</if>
+			<if test="hcChest != null">
+				#{hcChest,jdbcType=INTEGER},
+			</if>
+			<if test="hcToilet != null">
+				#{hcToilet,jdbcType=INTEGER},
+			</if>
+			<if test="hcWifi != null">
+				#{hcWifi,jdbcType=INTEGER},
+			</if>
+			<if test="hcCalorifier != null">
+				#{hcCalorifier,jdbcType=INTEGER},
+			</if>
+			<if test="hcKv != null">
+				#{hcKv,jdbcType=INTEGER},
+			</if>
+			<if test="hcBalcony != null">
+				#{hcBalcony,jdbcType=INTEGER},
+			</if>
+			<if test="hcWasher != null">
+				#{hcWasher,jdbcType=INTEGER},
+			</if>
+			<if test="hcRefrigerator != null">
+				#{hcRefrigerator,jdbcType=INTEGER},
+			</if>
+			<if test="hcTv != null">
+				#{hcTv,jdbcType=INTEGER},
+			</if>
+			<if test="hcPansonic != null">
+				#{hcPansonic,jdbcType=INTEGER},
+			</if>
+			<if test="hcGasstove != null">
+				#{hcGasstove,jdbcType=INTEGER},
+			</if>
+			<if test="hcCooker != null">
+				#{hcCooker,jdbcType=INTEGER},
+			</if>
+			<if test="hcSofa != null">
+				#{hcSofa,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.HouseConfig">
+		update house_config
+		<set>
+			<if test="hcHId != null">
+				hc_h_id = #{hcHId,jdbcType=INTEGER},
+			</if>
+			<if test="hcAir != null">
+				hc_air = #{hcAir,jdbcType=INTEGER},
+			</if>
+			<if test="hcBed != null">
+				hc_bed = #{hcBed,jdbcType=INTEGER},
+			</if>
+			<if test="hcTable != null">
+				hc_table = #{hcTable,jdbcType=INTEGER},
+			</if>
+			<if test="hcChest != null">
+				hc_chest = #{hcChest,jdbcType=INTEGER},
+			</if>
+			<if test="hcToilet != null">
+				hc_toilet = #{hcToilet,jdbcType=INTEGER},
+			</if>
+			<if test="hcWifi != null">
+				hc_wifi = #{hcWifi,jdbcType=INTEGER},
+			</if>
+			<if test="hcCalorifier != null">
+				hc_calorifier = #{hcCalorifier,jdbcType=INTEGER},
+			</if>
+			<if test="hcKv != null">
+				hc_kv = #{hcKv,jdbcType=INTEGER},
+			</if>
+			<if test="hcBalcony != null">
+				hc_balcony = #{hcBalcony,jdbcType=INTEGER},
+			</if>
+			<if test="hcWasher != null">
+				hc_washer = #{hcWasher,jdbcType=INTEGER},
+			</if>
+			<if test="hcRefrigerator != null">
+				hc_refrigerator = #{hcRefrigerator,jdbcType=INTEGER},
+			</if>
+			<if test="hcTv != null">
+				hc_tv = #{hcTv,jdbcType=INTEGER},
+			</if>
+			<if test="hcPansonic != null">
+				hc_pansonic = #{hcPansonic,jdbcType=INTEGER},
+			</if>
+			<if test="hcGasstove != null">
+				hc_gasstove = #{hcGasstove,jdbcType=INTEGER},
+			</if>
+			<if test="hcCooker != null">
+				hc_Cooker = #{hcCooker,jdbcType=INTEGER},
+			</if>
+			<if test="hcSofa != null">
+				hc_sofa = #{hcSofa,jdbcType=INTEGER},
+			</if>
+		</set>
+		where hc_id = #{hcId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.HouseConfig">
+		update house_config
+		set hc_h_id = #{hcHId,jdbcType=INTEGER},
+		hc_air = #{hcAir,jdbcType=INTEGER},
+		hc_bed = #{hcBed,jdbcType=INTEGER},
+		hc_table = #{hcTable,jdbcType=INTEGER},
+		hc_chest = #{hcChest,jdbcType=INTEGER},
+		hc_toilet = #{hcToilet,jdbcType=INTEGER},
+		hc_wifi = #{hcWifi,jdbcType=INTEGER},
+		hc_calorifier = #{hcCalorifier,jdbcType=INTEGER},
+		hc_kv = #{hcKv,jdbcType=INTEGER},
+		hc_balcony = #{hcBalcony,jdbcType=INTEGER},
+		hc_washer = #{hcWasher,jdbcType=INTEGER},
+		hc_refrigerator = #{hcRefrigerator,jdbcType=INTEGER},
+		hc_tv = #{hcTv,jdbcType=INTEGER},
+		hc_pansonic = #{hcPansonic,jdbcType=INTEGER},
+		hc_gasstove = #{hcGasstove,jdbcType=INTEGER},
+		hc_Cooker = #{hcCooker,jdbcType=INTEGER},
+		hc_sofa = #{hcSofa,jdbcType=INTEGER}
+		where hc_id = #{hcId,jdbcType=INTEGER}
+	</update>
+</mapper>

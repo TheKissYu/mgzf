@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.HotAreaMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.HotArea">
+		<id column="ha_id" jdbcType="INTEGER" property="haId" />
+		<result column="ha_ar_id" jdbcType="INTEGER" property="haArId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ha_id, ha_ar_id
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hotarea
+		where ha_id = #{haId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from hotarea
+		where ha_id = #{haId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.HotArea">
+		insert into hotarea (ha_id, ha_ar_id)
+		values (#{haId,jdbcType=INTEGER}, #{haArId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.HotArea">
+		insert into hotarea
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="haId != null">
+				ha_id,
+			</if>
+			<if test="haArId != null">
+				ha_ar_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="haId != null">
+				#{haId,jdbcType=INTEGER},
+			</if>
+			<if test="haArId != null">
+				#{haArId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.HotArea">
+		update hotarea
+		<set>
+			<if test="haArId != null">
+				ha_ar_id = #{haArId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ha_id = #{haId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.HotArea">
+		update hotarea
+		set ha_ar_id = #{haArId,jdbcType=INTEGER}
+		where ha_id = #{haId,jdbcType=INTEGER}
+	</update>
+</mapper>

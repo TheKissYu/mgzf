@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.HouseTypeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.HouseType">
+		<id column="ht_id" jdbcType="INTEGER" property="htId" />
+		<result column="ht_type" jdbcType="VARCHAR" property="htType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ht_id, ht_type
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from housetype
+		where ht_id = #{htId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from housetype
+		where ht_id = #{htId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.HouseType">
+		insert into housetype (ht_id, ht_type)
+		values (#{htId,jdbcType=INTEGER}, #{htType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.HouseType">
+		insert into housetype
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="htId != null">
+				ht_id,
+			</if>
+			<if test="htType != null">
+				ht_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="htId != null">
+				#{htId,jdbcType=INTEGER},
+			</if>
+			<if test="htType != null">
+				#{htType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.HouseType">
+		update housetype
+		<set>
+			<if test="htType != null">
+				ht_type = #{htType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ht_id = #{htId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.HouseType">
+		update housetype
+		set ht_type = #{htType,jdbcType=VARCHAR}
+		where ht_id = #{htId,jdbcType=INTEGER}
+	</update>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from housetype
+
+	</select>
+
+</mapper>

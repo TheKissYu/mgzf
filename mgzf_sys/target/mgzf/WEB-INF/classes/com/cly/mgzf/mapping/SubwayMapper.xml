@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.SubwayMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.Subway">
+		<id column="sb_id" jdbcType="INTEGER" property="sbId" />
+		<result column="sb_name" jdbcType="VARCHAR" property="sbName" />
+		<result column="sb_ct_id" jdbcType="INTEGER" property="sbCtId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		sb_id, sb_name, sb_ct_id
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from subway
+		where sb_id = #{sbId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from subway
+		where sb_id = #{sbId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.Subway">
+		insert into subway (sb_id, sb_name, sb_ct_id
+		)
+		values (#{sbId,jdbcType=INTEGER}, #{sbName,jdbcType=VARCHAR},
+		#{sbCtId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.Subway">
+		insert into subway
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sbId != null">
+				sb_id,
+			</if>
+			<if test="sbName != null">
+				sb_name,
+			</if>
+			<if test="sbCtId != null">
+				sb_ct_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sbId != null">
+				#{sbId,jdbcType=INTEGER},
+			</if>
+			<if test="sbName != null">
+				#{sbName,jdbcType=VARCHAR},
+			</if>
+			<if test="sbCtId != null">
+				#{sbCtId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.Subway">
+		update subway
+		<set>
+			<if test="sbName != null">
+				sb_name = #{sbName,jdbcType=VARCHAR},
+			</if>
+			<if test="sbCtId != null">
+				sb_ct_id = #{sbCtId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where sb_id = #{sbId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.Subway">
+		update subway
+		set sb_name = #{sbName,jdbcType=VARCHAR},
+		sb_ct_id = #{sbCtId,jdbcType=INTEGER}
+		where sb_id = #{sbId,jdbcType=INTEGER}
+	</update>
+</mapper>

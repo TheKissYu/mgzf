@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.HouseImgMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.HouseImg">
+		<id column="hi_id" jdbcType="INTEGER" property="hiId" />
+		<result column="hi_h_id" jdbcType="INTEGER" property="hiHId" />
+		<result column="hi_imgurl" jdbcType="VARCHAR"
+			property="hiImgurl" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		hi_id, hi_h_id, hi_imgurl
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from houseimg
+		where hi_id = #{hiId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from houseimg
+		where hi_id = #{hiId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.HouseImg">
+		insert into houseimg (hi_id, hi_h_id, hi_imgurl
+		)
+		values (#{hiId,jdbcType=INTEGER}, #{hiHId,jdbcType=INTEGER},
+		#{hiImgurl,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.HouseImg">
+		insert into houseimg
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="hiId != null">
+				hi_id,
+			</if>
+			<if test="hiHId != null">
+				hi_h_id,
+			</if>
+			<if test="hiImgurl != null">
+				hi_imgurl,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="hiId != null">
+				#{hiId,jdbcType=INTEGER},
+			</if>
+			<if test="hiHId != null">
+				#{hiHId,jdbcType=INTEGER},
+			</if>
+			<if test="hiImgurl != null">
+				#{hiImgurl,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.HouseImg">
+		update houseimg
+		<set>
+			<if test="hiHId != null">
+				hi_h_id = #{hiHId,jdbcType=INTEGER},
+			</if>
+			<if test="hiImgurl != null">
+				hi_imgurl = #{hiImgurl,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where hi_id = #{hiId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.HouseImg">
+		update houseimg
+		set hi_h_id = #{hiHId,jdbcType=INTEGER},
+		hi_imgurl = #{hiImgurl,jdbcType=VARCHAR}
+		where hi_id = #{hiId,jdbcType=INTEGER}
+	</update>
+	<select id="selectByHouseId"
+		parameterType="java.lang.Integer" resultType="string">
+		select
+		hi_imgurl
+		from houseimg
+		where hi_h_id = #{id,jdbcType=INTEGER}
+	</select>
+</mapper>

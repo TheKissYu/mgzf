@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.HotBrandMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.HotBrand">
+		<id column="hb_id" jdbcType="INTEGER" property="hbId" />
+		<result column="hb_name" jdbcType="VARCHAR" property="hbName" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		hb_id, hb_name
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from hotbrand
+		where hb_id = #{hbId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from hotbrand
+		where hb_id = #{hbId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.HotBrand">
+		insert into hotbrand (hb_id, hb_name)
+		values (#{hbId,jdbcType=INTEGER}, #{hbName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.HotBrand">
+		insert into hotbrand
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="hbId != null">
+				hb_id,
+			</if>
+			<if test="hbName != null">
+				hb_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="hbId != null">
+				#{hbId,jdbcType=INTEGER},
+			</if>
+			<if test="hbName != null">
+				#{hbName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.HotBrand">
+		update hotbrand
+		<set>
+			<if test="hbName != null">
+				hb_name = #{hbName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where hb_id = #{hbId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.HotBrand">
+		update hotbrand
+		set hb_name = #{hbName,jdbcType=VARCHAR}
+		where hb_id = #{hbId,jdbcType=INTEGER}
+	</update>
+</mapper>

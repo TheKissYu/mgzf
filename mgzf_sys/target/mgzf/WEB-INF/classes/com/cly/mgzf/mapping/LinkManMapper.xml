@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.LinkManMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.LinkMan">
+		<id column="lk_id" jdbcType="INTEGER" property="lkId" />
+		<result column="lk_name" jdbcType="VARCHAR" property="lkName" />
+		<result column="lk_tel" jdbcType="VARCHAR" property="lkTel" />
+		<result column="lk_password" jdbcType="VARCHAR"
+			property="lkPassword" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		lk_id, lk_name, lk_tel, lk_password
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from linkman
+		where lk_id = #{lkId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from linkman
+		where lk_id = #{lkId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.LinkMan">
+		insert into linkman (lk_id, lk_name, lk_tel,
+		lk_password)
+		values (#{lkId,jdbcType=INTEGER}, #{lkName,jdbcType=VARCHAR},
+		#{lkTel,jdbcType=VARCHAR},
+		#{lkPassword,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.LinkMan">
+		insert into linkman
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="lkId != null">
+				lk_id,
+			</if>
+			<if test="lkName != null">
+				lk_name,
+			</if>
+			<if test="lkTel != null">
+				lk_tel,
+			</if>
+			<if test="lkPassword != null">
+				lk_password,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="lkId != null">
+				#{lkId,jdbcType=INTEGER},
+			</if>
+			<if test="lkName != null">
+				#{lkName,jdbcType=VARCHAR},
+			</if>
+			<if test="lkTel != null">
+				#{lkTel,jdbcType=VARCHAR},
+			</if>
+			<if test="lkPassword != null">
+				#{lkPassword,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.LinkMan">
+		update linkman
+		<set>
+			<if test="lkName != null">
+				lk_name = #{lkName,jdbcType=VARCHAR},
+			</if>
+			<if test="lkTel != null">
+				lk_tel = #{lkTel,jdbcType=VARCHAR},
+			</if>
+			<if test="lkPassword != null">
+				lk_password = #{lkPassword,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where lk_id = #{lkId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.LinkMan">
+		update linkman
+		set lk_name = #{lkName,jdbcType=VARCHAR},
+		lk_tel = #{lkTel,jdbcType=VARCHAR},
+		lk_password = #{lkPassword,jdbcType=VARCHAR}
+		where lk_id = #{lkId,jdbcType=INTEGER}
+	</update>
+</mapper>

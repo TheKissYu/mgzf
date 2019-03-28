@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.PayWayMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.PayWay">
+		<id column="pw_id" jdbcType="INTEGER" property="pwId" />
+		<result column="pw_type" jdbcType="VARCHAR" property="pwType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		pw_id, pw_type
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from payway
+		where pw_id = #{pwId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from payway
+		where pw_id = #{pwId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.PayWay">
+		insert into payway (pw_id, pw_type)
+		values (#{pwId,jdbcType=INTEGER}, #{pwType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.PayWay">
+		insert into payway
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pwId != null">
+				pw_id,
+			</if>
+			<if test="pwType != null">
+				pw_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pwId != null">
+				#{pwId,jdbcType=INTEGER},
+			</if>
+			<if test="pwType != null">
+				#{pwType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.PayWay">
+		update payway
+		<set>
+			<if test="pwType != null">
+				pw_type = #{pwType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where pw_id = #{pwId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.PayWay">
+		update payway
+		set pw_type = #{pwType,jdbcType=VARCHAR}
+		where pw_id = #{pwId,jdbcType=INTEGER}
+	</update>
+</mapper>

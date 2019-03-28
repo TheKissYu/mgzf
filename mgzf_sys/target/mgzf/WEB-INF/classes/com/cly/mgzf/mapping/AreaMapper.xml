@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.AreaMapper">
+	<resultMap id="BaseResultMap" type="com.cly.mgzf.enity.Area">
+		<id column="ar_id" jdbcType="INTEGER" property="arId" />
+		<result column="ar_name" jdbcType="VARCHAR" property="arName" />
+		<result column="ar_ct_id" jdbcType="INTEGER" property="arCtId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ar_id, ar_name, ar_ct_id
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from area
+		where ar_id = #{arId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from area
+		where ar_id = #{arId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.Area">
+		insert into area (ar_id, ar_name, ar_ct_id
+		)
+		values (#{arId,jdbcType=INTEGER}, #{arName,jdbcType=VARCHAR},
+		#{arCtId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.Area">
+		insert into area
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="arId != null">
+				ar_id,
+			</if>
+			<if test="arName != null">
+				ar_name,
+			</if>
+			<if test="arCtId != null">
+				ar_ct_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="arId != null">
+				#{arId,jdbcType=INTEGER},
+			</if>
+			<if test="arName != null">
+				#{arName,jdbcType=VARCHAR},
+			</if>
+			<if test="arCtId != null">
+				#{arCtId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.Area">
+		update area
+		<set>
+			<if test="arName != null">
+				ar_name = #{arName,jdbcType=VARCHAR},
+			</if>
+			<if test="arCtId != null">
+				ar_ct_id = #{arCtId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ar_id = #{arId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.Area">
+		update area
+		set ar_name = #{arName,jdbcType=VARCHAR},
+		ar_ct_id = #{arCtId,jdbcType=INTEGER}
+		where ar_id = #{arId,jdbcType=INTEGER}
+	</update>
+	<select id="selectByArCtId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from area where ar_ct_id=#{arCtId,jdbcType=INTEGER}
+	</select>
+
+</mapper>

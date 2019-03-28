@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cly.mgzf.dao.RentTypeMapper">
+	<resultMap id="BaseResultMap"
+		type="com.cly.mgzf.enity.RentType">
+		<id column="rt_id" jdbcType="INTEGER" property="rtId" />
+		<result column="t_type" jdbcType="VARCHAR" property="tType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		rt_id, t_type
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from renttype
+		where rt_id = #{rtId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from renttype
+		where rt_id = #{rtId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.cly.mgzf.enity.RentType">
+		insert into renttype (rt_id, t_type)
+		values (#{rtId,jdbcType=INTEGER}, #{tType,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.cly.mgzf.enity.RentType">
+		insert into renttype
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="rtId != null">
+				rt_id,
+			</if>
+			<if test="tType != null">
+				t_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="rtId != null">
+				#{rtId,jdbcType=INTEGER},
+			</if>
+			<if test="tType != null">
+				#{tType,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.cly.mgzf.enity.RentType">
+		update renttype
+		<set>
+			<if test="tType != null">
+				t_type = #{tType,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where rt_id = #{rtId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.cly.mgzf.enity.RentType">
+		update renttype
+		set t_type = #{tType,jdbcType=VARCHAR}
+		where rt_id = #{rtId,jdbcType=INTEGER}
+	</update>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from renttype
+	</select>
+</mapper>
